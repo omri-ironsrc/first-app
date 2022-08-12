@@ -1,0 +1,9 @@
+### Get health check
+GET localhost:9000/health
+
+### Get login page
+POST http://localhost:9000/users
+Content-Type: application/json
+Authorization: Bearer W9@bl6B95su7lW
+
+{"user": "yossi"}

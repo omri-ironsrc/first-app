@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <title>Users</title>
+</head>
+<body>
+<h1>Users Management</h1>
+<form action="/users" method="post">
+    <div class="container">
+        <label>
+            <input type="text" placeholder="Add User" name="user" required>
+        </label>
+        <button type="submit">Add User</button>
+    </div>
+</form>
+<form action="/users" method="delete">
+    <div class="container">
+        <label>
+            <input type="text" placeholder="Delete User" name="user" required>
+        </label>
+        <button type="submit">Delete User</button>
+    </div>
+</form>
+</body>
+</html>
