@@ -33,23 +33,16 @@ let userController = {
             let message = 'user not exists'
             let display = 'none'
 
-            console.log(req.session.superuser)
-            // if (!req.session.superuser) {
-            //     message = 'you are not allowed to delete users'
-            //     display = null
-            // } else {
-            //
-                if (req.session.users) {
-                    if (req.session.users.indexOf(req.query.user) !== -1) {
-                        console.log('if')
-                        req.session.users = req.session.users.filter(user => user !== req.query.user)
-                    } else {
-                        console.log('else')
-                        display = null
-                    }
-
+            if (req.session.users) {
+                if (req.session.users.indexOf(req.query.user) !== -1) {
+                    console.log('if')
+                    req.session.users = req.session.users.filter(user => user !== req.query.user)
+                } else {
+                    console.log('else')
+                    display = null
                 }
-            // }
+
+            }
 
             req.session.save(function (error) {
                 if (error) return next(error)

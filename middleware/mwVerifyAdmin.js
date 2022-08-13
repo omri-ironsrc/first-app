@@ -5,7 +5,7 @@ const mwVerifyAdmin = (req, res, next) => {
     if (verifiedUsers.indexOf(req.body.user.toLowerCase()) !== -1) {
         next()
     } else {
-        res.sendStatus(401)
+        res.status(401).send({message: 'You are not supposed to be here'})
     }
 }
 
