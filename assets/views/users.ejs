@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <title>Users</title>
+    <% var message %>
+    <% var users %>
+    <% var display %>
+</head>
+<body>
+<div class="first-div">
+    <h1>Users Management</h1>
+    <form>
+        <div>
+            <label>
+                <input type="text" placeholder="Username" name="user" id="user" required>
+            </label>
+            <div class="second-div">
+                <button formaction="/users" formmethod="post" type="submit">Add User</button>
+                <button type="submit" onclick="deleteSomething(document.getElementById('user').value)">Delete User</button>
+            </div>
+        </div>
+    </form>
+    <label style="color: red; display: <%- display -%>"><%- message -%></label>
+    <div class="second-div">
+        <h2>Users:</h2>
+        <div class="second-div">
+            <%- users -%>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function deleteSomething(user) {
+        fetch('users?user=' + user, {
+            method: 'delete'
+        })
+    }
+</script>
+</html>

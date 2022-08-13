@@ -6,9 +6,10 @@ let loginController = {
         console.log('LoginController.login')
         req.session.regenerate(function () {
             req.session.user = req.body.user
+            req.session.users = [req.session.user]
             req.session.save(function (error) {
                 if (error) return next(error)
-                res.redirect('/views/users.html')
+                res.render('users', {users: req.session.users})
             })
         })
     }

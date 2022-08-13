@@ -2,19 +2,25 @@ body {
     background-color: cornsilk;
     font-family: sans-serif;
     color: darkslategrey;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .first-div {
-    width: 600px;
-    height: 300px;
+    border: 1px solid darkslategrey;
     border-radius: 25px;
-    margin: auto;
-    text-align: center;
+    padding: 15px;
 }
 
 .second-div {
-    padding-top: 120px;
-    display: grid;
+    padding: 15px;
+}
+
+h1 {
+    margin: 0;
+    padding: 20px;
 }
 
 form {
@@ -37,7 +43,6 @@ button {
     outline: none;
     border-radius: 50px;
     height: 25px;
-    /*width: 80px;*/
     background-color: darkslategrey;
     color: cornsilk;
 }

@@ -1,11 +1,12 @@
 const express = require('express')
 const userController = require('../controllers/userController')
+const mwVerifySuperAdmin = require('../middleware/mwVerifySuperAdmin')
 const router = express.Router()
 
-// userAdmin  - onyl admin will perform delete and post otherwie return 401;
+// userAdmin  - only superadmin will perform delete and post otherwise return 401
 router.route('/')
     .get(userController.getAllUsers)
     .post(userController.addNewUser)
-    .delete(userController.deleteUser)
+    .delete(mwVerifySuperAdmin, userController.deleteUser)
 
 module.exports = router

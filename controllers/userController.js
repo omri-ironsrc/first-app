@@ -1,16 +1,65 @@
 let userController = {
     getAllUsers: (req, res) => {
         console.log('userController.getAllUsers')
-        res.redirect('views/users.html')
-        // return res.render('index', {content: JSON.stringify(req.session.user)});
+        res.render('users', {users: req.session.users})
     },
     addNewUser: (req, res) => {
         console.log('userController.addNewUser')
-        return res.json({'message': 'adding a user'})
+        req.session.reload(function () {
+            let message = 'User is already exists'
+            let display = 'none'
+
+            if (req.session.users) {
+                if (req.session.users.indexOf(req.body.user) === -1) {
+                    req.session.users.push(req.body.user)
+                } else {
+                    display = null
+                }
+            }
+
+            req.session.save(function (error) {
+                if (error) return next(error)
+                res.render('users', {
+                    users: req.session.users,
+                    display: display,
+                    message: message
+                })
+            })
+        })
     },
     deleteUser: (req, res) => {
         console.log('userController.deleteUser')
-        return res.json({'message': 'deleting a user'})
+        req.session.reload(function () {
+            let message = 'user not exists'
+            let display = 'none'
+
+            console.log(req.session.superuser)
+            // if (!req.session.superuser) {
+            //     message = 'you are not allowed to delete users'
+            //     display = null
+            // } else {
+            //
+                if (req.session.users) {
+                    if (req.session.users.indexOf(req.query.user) !== -1) {
+                        console.log('if')
+                        req.session.users = req.session.users.filter(user => user !== req.query.user)
+                    } else {
+                        console.log('else')
+                        display = null
+                    }
+
+                }
+            // }
+
+            req.session.save(function (error) {
+                if (error) return next(error)
+                res.render('users', {
+                    users: req.session.users,
+                    display: display,
+                    message: message
+                })
+            })
+        })
     }
 }
 

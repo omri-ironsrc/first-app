@@ -1,11 +1,11 @@
 const mwVerifyAdmin = (req, res, next) => {
-    const verifiedUsers = ['admin', 'Admin']
+    const verifiedUsers = ['admin', 'superadmin']
     console.log('mwVerifyAdmin')
 
-    if (verifiedUsers.indexOf(req.body.user) !== -1) {
+    if (verifiedUsers.indexOf(req.body.user.toLowerCase()) !== -1) {
         next()
     } else {
-        res.render('person', {content: req.body.user})
+        res.sendStatus(401)
     }
 }
 

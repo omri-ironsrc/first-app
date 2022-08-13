@@ -8,7 +8,6 @@ const loginRouter = require('./routers/loginRouter')
 const session = require('express-session')
 const mwTimeStamp = require('./middleware/mwTimestamp')
 const mwPrintSession = require('./middleware/mwPrintSession')
-const mwVerifyAdmin = require('./middleware/mwVerifyAdmin')
 const path = require('path')
 const app = express()
 const port = 9001
