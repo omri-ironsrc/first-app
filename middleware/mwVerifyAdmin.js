@@ -1,6 +1,6 @@
 const mwVerifyAdmin = (req, res, next) => {
     const verifiedUsers = ['admin', 'superadmin']
-    console.log('mwVerifyAdmin')
+    console.log('-- mwVerifyAdmin --')
 
     if (verifiedUsers.indexOf(req.body.user.toLowerCase()) !== -1) {
         next()

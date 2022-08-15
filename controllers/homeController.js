@@ -1,6 +1,6 @@
 let homeController = {
     home: (req, res) => {
-        console.log('homeController.home')
+        console.log('-- home --')
         res.redirect('/views/home.html')
     }
 }

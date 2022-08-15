@@ -1,6 +1,6 @@
 let helloController = {
     hello: (req, res) => {
-        console.log('helloController.hello')
+        console.log('-- hello --')
         res.redirect('/views/hello.html')
     }
 }

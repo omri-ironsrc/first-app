@@ -7,10 +7,9 @@ const helloRouter = require('./routers/helloRouter')
 const loginRouter = require('./routers/loginRouter')
 const session = require('express-session')
 const mwTimeStamp = require('./middleware/mwTimestamp')
-const mwPrintSession = require('./middleware/mwPrintSession')
 const path = require('path')
 const app = express()
-const port = 9001
+const port = 3000
 
 let sess = session({
     secret: 'some-secret',
@@ -25,7 +24,6 @@ app.use(sess)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(mwTimeStamp)
-// app.use(mwPrintSession)
 app.use('/', homeRouter)
 app.use('/hello', helloRouter)
 app.use('/login', loginRouter)

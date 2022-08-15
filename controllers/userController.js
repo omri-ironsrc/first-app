@@ -1,15 +1,12 @@
 let userController = {
-    getAllUsers: (req, res, next) => {
-        console.log('userController.getAllUsers')
-        res.render('users', {
-            users: req.session.users,
-            display: 'none',
-            message: ''
-        })
+    getAllUsers: (req, res) => {
+        console.log('-- getAllUsers --')
+        renderUsers(res, req.session.users, 'none', null)
     },
     addNewUser: (req, res) => {
-        console.log('userController.addNewUser')
+        console.log('-- addNewUser --')
         req.session.reload(function () {
+            let message = 'user already exists'
             let display = 'none'
 
             if (req.session.users) {
@@ -20,12 +17,13 @@ let userController = {
                 }
             }
 
-            saveSession(req, res, req.session.users, display, 'user already exists')
+            saveSession(req, res, req.session.users, display, message)
         })
     },
     deleteUser: (req, res) => {
-        console.log('userController.deleteUser')
+        console.log('-- deleteUser --')
         req.session.reload(function () {
+            let message = 'user not exists'
             let display = 'none'
 
             if (req.session.users) {
@@ -36,7 +34,7 @@ let userController = {
                 }
             }
 
-            saveSession(req, res, req.session.users, display, 'user not exists')
+            saveSession(req, res, req.session.users, display, message)
         })
     }
 }
@@ -44,11 +42,15 @@ let userController = {
 function saveSession(req, res, users, display, message) {
     req.session.save(function (error) {
         if (error) return next(error)
-        res.render('users', {
-            users: users,
-            display: display,
-            message: message
-        })
+        renderUsers(req, res, users, display, message)
+    })
+}
+
+function renderUsers(res, users, display, message) {
+    res.render('users', {
+        users: users,
+        display: display,
+        message: message
     })
 }
 
