@@ -1,6 +1,6 @@
-const mwVerifySuperAdmin = (req, res, next) => {
+const verifySuperadmin = (req, res, next) => {
     const verifiedUsers = ['superadmin']
-    console.log('-- mwVerifySuperAdmin --')
+    console.log('-- verifySuperadmin --')
 
     if (verifiedUsers.indexOf(req.session.user.toLowerCase()) !== -1) {
         next()
@@ -9,4 +9,4 @@ const mwVerifySuperAdmin = (req, res, next) => {
     }
 }
 
-module.exports = mwVerifySuperAdmin
+module.exports = verifySuperadmin

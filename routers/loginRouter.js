@@ -1,10 +1,10 @@
 const express = require('express')
 const loginController = require('../controllers/loginController')
 const router = express.Router()
-const mwVerifyAdmin = require('../middleware/mwVerifyAdmin')
+const verifyAdmin = require('../middleware/verifyAdmin')
 
 router.route('/')
     .get(loginController.loginHome)
-    .post(mwVerifyAdmin, loginController.login)
+    .post(verifyAdmin, loginController.login)
 
 module.exports = router
