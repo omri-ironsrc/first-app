@@ -1,7 +1,11 @@
 let userController = {
     getAllUsers: (req, res) => {
         console.log('-- getAllUsers --')
-        renderUsers(res, req.session.users, 'none', null)
+        res.render('users', {
+            users: req.session.users,
+            display: 'none',
+            message: ''
+        })
     },
     addNewUser: (req, res) => {
         console.log('-- addNewUser --')
@@ -42,15 +46,11 @@ let userController = {
 function saveSession(req, res, users, display, message) {
     req.session.save(function (error) {
         if (error) return next(error)
-        renderUsers(req, res, users, display, message)
-    })
-}
-
-function renderUsers(res, users, display, message) {
-    res.render('users', {
-        users: users,
-        display: display,
-        message: message
+        res.render('users', {
+            users: users,
+            display: display,
+            message: message
+        })
     })
 }
 

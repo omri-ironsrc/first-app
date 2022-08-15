@@ -18,7 +18,7 @@
             </label>
             <div class="second-div">
                 <button formaction="/users" formmethod="post" type="submit">Add User</button>
-                <button type="submit" onclick="deleteSomething(document.getElementById('user').value)">Delete User</button>
+                <button type="submit" onclick="deleteUser(document.getElementById('user').value)">Delete User</button>
             </div>
         </div>
     </form>
@@ -32,7 +32,7 @@
 </div>
 </body>
 <script>
-    function deleteSomething(user) {
+    function deleteUser(user) {
         fetch('users?user=' + user, {
             method: 'delete'
         })
