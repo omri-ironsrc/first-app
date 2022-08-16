@@ -8,50 +8,44 @@ let userController = {
         })
     },
     addNewUser: (req, res) => {
-        console.log('-- addNewUser --')
         req.session.reload(function () {
-            let message = 'user already exists'
+            let message
             let display = 'none'
 
-            if (req.session.users) {
-                if (req.session.users.indexOf(req.body.user) === -1) {
-                    req.session.users.push(req.body.user)
+            if (req.session.users && req.body.user) {
+                const user = req.body.user.substring(0, req.body.user.indexOf(':'))
+
+                if (req.body.user.includes('add')) {
+                    console.log('-- addNewUser --')
+
+                    if (req.session.users.indexOf(user) === -1) {
+                        req.session.users.push(user)
+                    } else {
+                        display = null
+                        message = 'user already exists'
+                    }
                 } else {
-                    display = null
+                    console.log('-- deleteUser --')
+
+                    if (req.session.users.indexOf(user) !== -1) {
+                        req.session.users = req.session.users.filter(element => element !== user)
+                    } else {
+                        display = null
+                        message = 'user not exists'
+                    }
                 }
             }
 
-            saveSession(req, res, req.session.users, display, message)
-        })
-    },
-    deleteUser: (req, res) => {
-        console.log('-- deleteUser --')
-        req.session.reload(function () {
-            let message = 'user not exists'
-            let display = 'none'
-
-            if (req.session.users) {
-                if (req.session.users.indexOf(req.query.user) !== -1) {
-                    req.session.users = req.session.users.filter(user => user !== req.query.user)
-                } else {
-                    display = null
-                }
-            }
-
-            saveSession(req, res, req.session.users, display, message)
+            req.session.save(function (error) {
+                if (error) return next(error)
+                res.render('users', {
+                    users: req.session.users,
+                    display: display,
+                    message: message
+                })
+            })
         })
     }
-}
-
-function saveSession(req, res, users, display, message) {
-    req.session.save(function (error) {
-        if (error) return next(error)
-        res.render('users', {
-            users: users,
-            display: display,
-            message: message
-        })
-    })
 }
 
 module.exports = userController

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../styles/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>Users</title>
     <% var message %>
     <% var users %>
@@ -17,8 +18,8 @@
                 <input type="text" placeholder="Username" name="user" id="user" required>
             </label>
             <div class="second-div">
-                <button formaction="/users" formmethod="post" type="submit">Add User</button>
-                <button type="submit" onclick="deleteUser(document.getElementById('user').value)">Delete User</button>
+                <button formaction="/users" formmethod="post" onclick="$('#user').val($('#user').val() + ':add')" type="submit">Add User</button>
+                <button formaction="/users" formmethod="post" onclick="$('#user').val($('#user').val() + ':delete')" type="submit">Delete User</button>
             </div>
         </div>
     </form>
@@ -31,11 +32,4 @@
     </div>
 </div>
 </body>
-<script>
-    function deleteUser(user) {
-        fetch('users?user=' + user, {
-            method: 'delete'
-        })
-    }
-</script>
 </html>

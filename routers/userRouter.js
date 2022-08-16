@@ -1,11 +1,10 @@
 const express = require('express')
 const userController = require('../controllers/userController')
-const verifySuperadmin = require('../middleware/verifySuperadmin')
 const router = express.Router()
+const verifySuperadmin = require('../middleware/verifySuperadmin')
 
 router.route('/')
     .get(userController.getAllUsers)
-    .post(userController.addNewUser)
-    .delete(verifySuperadmin, userController.deleteUser)
+    .post(verifySuperadmin, userController.addNewUser)
 
 module.exports = router
